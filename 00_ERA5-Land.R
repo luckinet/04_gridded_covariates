@@ -230,12 +230,12 @@ Data_ls <- lapply(Regions_ls, FUN = function(RegionIter){
 	## Interpolation -------------------------------------------------------------
 	message("-------- INTERPOLATING SUMMARISED DATA")
 	### Covariates ++++++++++++++++++++++++++
-	if(file.exists(file.path(Dir.Covariates, paste(RegionName, "_Covariates_Train.nc", sep = "_"))) &
-		 file.exists(file.path(Dir.Covariates, paste(RegionName, "_Covariates_Target.nc", sep ="_")))
+	if(file.exists(file.path(Dir.Covariates, paste(RegionName, "Covariates_Train.nc", sep = "_"))) &
+		 file.exists(file.path(Dir.Covariates, paste(RegionName, "Covariates_Target.nc", sep ="_")))
 		 ){
 		Covariates_ls <- list(
-			Training = rast(file.path(Dir.Covariates, "Covariates_Train.nc")),
-			Target = rast(file.path(Dir.Covariates, "Covariates_Target.nc"))
+			Training = rast(file.path(Dir.Covariates, paste(RegionName, "Covariates_Train.nc", sep = "_"))),
+			Target = rast(file.path(Dir.Covariates, paste(RegionName, "Covariates_Target.nc", sep = "_")))
 		)
 		names(Covariates_ls$Training) <- names(Covariates_ls$Target) <- c("GMTED2010", "tkdry", "tksat", "csol", "k_s", "lambda", "psi", "theta_s")
 	}else{
@@ -294,3 +294,4 @@ Data_ls <- lapply(Regions_ls, FUN = function(RegionIter){
 	})
 	
 })
+		
