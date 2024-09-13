@@ -53,3 +53,10 @@ _data
 _misc
 _pub
 _admin
+
+# Era5-Land specific
+API-Credentials.R
+*OldScript.R
+*.DS_Store
+Data_*/*
+Covariates/*
