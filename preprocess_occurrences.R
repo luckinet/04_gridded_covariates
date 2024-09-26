@@ -17,17 +17,76 @@
 
 message("\n---- rasterize occurrences ----")
 
+
+
+for(i in seq_along()){
+
+  thisNation <- "Brazil"
+  message(" ---- ", thisNation, " ----")
+
+  targetCrops <-  c("cotton", "maize", "soybean")
+
+  table <- read_rds(file = paste0(dir_census_data, "tables/stage3/", thisNation, ".rds")) # revise
+  geom <- read_sf(paste0(dir_census_data, "geometries/stage3/", thisNation, ".gpkg"), layer = "al3") # revise
+
+  tempTab <- table |>
+    filter(geoID == "15") |> # revise
+    filter(year == 2010) |> # revise
+    filter(crop %in% targetCrops) |>
+    pivot_wider(id_cols = c("geoID", "gazID", "year"),
+                names_from = "crop", values_from = "hectares_harvested", values_fn = sum)
+
+  tempGeom <- geom |>
+    filter(geoID == "15") # revise
+
+  full <- tempTab |>
+    left_join(tempGeom, by = c("gazID", "geoID")) |>
+    filter(!is.na(gazName)) |> # revise
+    st_sf()
+
+  for(j in seq_along(targetCrops)){
+
+    thisCrop <- targetCrops[j]
+
+    message("      ", thisCrop)
+
+    thePath <- paste0(dir_grid_data, "occurrence/", targetCrops[j], "_", model_info$tag, ".tif")
+    temp <- full |>
+      select(targetCrops[j]) |>
+      mutate(binarized = if_else(is.na(!!sym(thisCrop)), NA, if_else(!!sym(thisCrop) == 0, 0, 1)))
+
+    rasterize(x = temp, y = rast(path_modelregion), field = "binarized",
+              filename = thePath,
+              overwrite = TRUE,
+              filetype = "GTiff",
+              datatype = "INT1U",
+              gdal = c("COMPRESS=DEFLATE", "ZLEVEL=9", "PREDICTOR=2"))
+
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
 # path_occurrence <- paste0(dir_grid_wip, "occ_CNCP_YR_", model_name, "_", model_version,
 # path_ahID <- paste0(dir_grid_wip, "admin_LVL_", model_name, "_", model_version, ".tif")
 
 # 1. make paths ----
 #
-path_rst_gadm1 <- str_replace(path_ahID, "LVL", "1")
-options(adb_path = dir_census_wip) # include this as option in adb_inventory
+# path_rst_gadm1 <- str_replace(path_ahID, "LVL", "1")
+# options(adb_path = dir_census_wip) # include this as option in adb_inventory
 
 # 2. load data ----
 #
-vct_gadm_lvl1 <- st_read(dsn = paste0(dir_data_in, "gadm36_levels.gpkg"), layer = "level0")
+vct_gadm_lvl1 <- st_read(dsn = paste0(dir_data, "gadm36_levels.gpkg"), layer = "level0")
 
 tbl_geoscheme <- readRDS(file = path_geoscheme_gadm)
 tbl_invDataseries <- adb_inventory(type = "dataseries")

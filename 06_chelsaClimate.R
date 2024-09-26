@@ -18,7 +18,7 @@
 thisDataset <- "chelsaClimate"
 message("\n---- ", thisDataset, " ----")
 
-thisDir <- .get_path(module = "grid", data = thisDataset)
+thisDir <- paste0(dir_grid_data, thisDataset, "/")
 
 message(" --> handling metadata")
 regDataseries(name = thisDataset,
@@ -40,8 +40,15 @@ for(i in seq_along(theseFiles)){
   if(!testFileExists(x = thisDir_mdl, access = "rw")){
 
     message(" ---- layer ", theseFiles[i], " ----")
-    crop(x = rast(thisFile), y = rast(x = path_modelregion),
-         snap = "out",
+    resample(x = rast(thisFile), y = rast(path_template),
+             filename = thisDir_mdl,
+             overwrite = TRUE,
+             filetype = "GTiff",
+             datatype = datatype(rast(thisFile)),
+             gdal = c("COMPRESS=DEFLATE", "ZLEVEL=9", "PREDICTOR=2"))
+
+    crop(x = rast(thisDir_mdl), y = rast(x = path_modelregion),
+         snap = "out", mask = TRUE,
          filename = thisDir_mdl,
          overwrite = TRUE,
          filetype = "GTiff",

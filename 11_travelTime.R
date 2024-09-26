@@ -1,9 +1,9 @@
 # ----
-# title       : prepare gridded layers - linear distance
-# description : This is the script for hamonizing linear distance layers
+# title       : prepare gridded layers - _INESRT
+# description : This is the script for hamonizing _INSERT
 # license     : https://creativecommons.org/licenses/by-sa/4.0/
-# authors     : Ruben Remelgado, Steffen Ehrmann
-# date        : 2024-08-09
+# authors     : Steffen Ehrmann, Ruben Remelgado
+# date        : 2024-MM-DD
 # version     : 0.0.0
 # status      : find data, update, inventarize, validate, normalize, done
 # comment     : file.edit(paste0(dir_docs, "/documentation/03_prepare_gridded_layers.md"))
@@ -15,10 +15,10 @@
 # variables   : _INSERT
 # ----
 
-thisDataset <- "linearDistance"
+thisDataset <- "travelTime"
 message("\n---- ", thisDataset, " ----")
 
-thisDir <- .get_path(module = "grid", data = thisDataset)
+thisDir <- paste0(dir_grid_data, thisDataset, "/")
 
 message(" --> handling metadata")
 regDataseries(name = thisDataset,
@@ -29,7 +29,7 @@ regDataseries(name = thisDataset,
               reference = read.bib(paste0(thisDir, "_INSERT.bib")))
 
 message(" --> handling data")
-theseFiles <- list.files(path = thisDir, pattern = "_10as.tif")
+theseFiles <- list.files(path = thisDir, pattern = "_30as.tif")
 
 for(i in seq_along(theseFiles)){
 
@@ -39,14 +39,14 @@ for(i in seq_along(theseFiles)){
         thisDir_mdl <- str_replace(thisFile, ".tif", paste0("_", model_info$tag, ".tif"))
         if(!testFileExists(x = thisDir_mdl, access = "rw")){
 
-          message(" ---- layer ", theseFiles[i], " ----")
-          crop(x = rast(thisFile), y = rast(x = path_modelregion),
-               snap = "out",
-               filename = thisDir_mdl,
-               overwrite = TRUE,
-               filetype = "GTiff",
-               datatype = datatype(rast(thisFile)),
-               gdal = c("COMPRESS=DEFLATE", "ZLEVEL=9", "PREDICTOR=2"))
+                message(" ---- layer ", theseFiles[i], " ----")
+                crop(x = rast(thisFile), y = rast(x = path_modelregion),
+                     snap = "out",
+                     filename = thisDir_mdl,
+                     overwrite = TRUE,
+                     filetype = "GTiff",
+                     datatype = datatype(rast(thisFile)),
+                     gdal = c("COMPRESS=DEFLATE", "ZLEVEL=9", "PREDICTOR=2"))
 
         }
 

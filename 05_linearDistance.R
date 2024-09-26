@@ -1,9 +1,9 @@
 # ----
-# title       : prepare gridded layers - _INESRT
-# description : This is the script for hamonizing _INSERT
+# title       : prepare gridded layers - linear distance
+# description : This is the script for hamonizing linear distance layers
 # license     : https://creativecommons.org/licenses/by-sa/4.0/
-# authors     : Steffen Ehrmann, Ruben Remelgado
-# date        : 2024-MM-DD
+# authors     : Ruben Remelgado, Steffen Ehrmann
+# date        : 2024-08-09
 # version     : 0.0.0
 # status      : find data, update, inventarize, validate, normalize, done
 # comment     : file.edit(paste0(dir_docs, "/documentation/03_prepare_gridded_layers.md"))
@@ -15,10 +15,11 @@
 # variables   : _INSERT
 # ----
 
-thisDataset <- "dmsp"
+thisDataset <- "linearDistance"
 message("\n---- ", thisDataset, " ----")
+# source(paste0(.get_path("grid"), "preprocess_linearDistance.R"))
 
-thisDir <- .get_path(module = "grid", data = thisDataset)
+thisDir <- paste0(dir_grid_data, thisDataset, "/")
 
 message(" --> handling metadata")
 regDataseries(name = thisDataset,
@@ -29,7 +30,7 @@ regDataseries(name = thisDataset,
               reference = read.bib(paste0(thisDir, "_INSERT.bib")))
 
 message(" --> handling data")
-theseFiles <- list.files(path = thisDir, pattern = "_30as.tif")
+theseFiles <- list.files(path = thisDir, pattern = "_10as.tif")
 
 for(i in seq_along(theseFiles)){
 

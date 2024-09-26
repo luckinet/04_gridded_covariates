@@ -18,7 +18,7 @@
 thisDataset <- "cciLandcover"
 message("\n---- ", thisDataset, " ----")
 
-thisDir <- .get_path(module = "grid", data = thisDataset)
+thisDir <- paste0(dir_grid_data, thisDataset, "/")
 
 message(" --> handling metadata")
 regDataseries(name = thisDataset,

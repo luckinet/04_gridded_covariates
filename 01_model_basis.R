@@ -16,6 +16,7 @@
 # ----
 
 message("\n---- construct model layers ----")
+source(paste0(.get_path("grid"), "preprocess_occurrences.R"))
 
 # path_ahID <- paste0(dir_grid_wip, "admin_LVL_", model_name, "_", model_version, ".tif")
 

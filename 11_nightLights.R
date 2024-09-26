@@ -15,10 +15,10 @@
 # variables   : _INSERT
 # ----
 
-thisDataset <- "soilGrids"
+thisDataset <- "dmsp"
 message("\n---- ", thisDataset, " ----")
 
-thisDir <- .get_path(module = "grid", data = thisDataset)
+thisDir <- paste0(dir_grid_data, thisDataset, "/")
 
 message(" --> handling metadata")
 regDataseries(name = thisDataset,
@@ -33,22 +33,22 @@ theseFiles <- list.files(path = thisDir, pattern = "_30as.tif")
 
 for(i in seq_along(theseFiles)){
 
-  thisFile <- paste0(thisDir, theseFiles[i])
+        thisFile <- paste0(thisDir, theseFiles[i])
 
-  # crop to model extent
-  thisDir_mdl <- str_replace(thisFile, ".tif", paste0("_", model_info$tag, ".tif"))
-  if(!testFileExists(x = thisDir_mdl, access = "rw")){
+        # crop to model extent
+        thisDir_mdl <- str_replace(thisFile, ".tif", paste0("_", model_info$tag, ".tif"))
+        if(!testFileExists(x = thisDir_mdl, access = "rw")){
 
-    message(" ---- layer ", theseFiles[i], " ----")
-    crop(x = rast(thisFile), y = rast(x = path_modelregion),
-         snap = "out",
-         filename = thisDir_mdl,
-         overwrite = TRUE,
-         filetype = "GTiff",
-         datatype = datatype(rast(thisFile)),
-         gdal = c("COMPRESS=DEFLATE", "ZLEVEL=9", "PREDICTOR=2"))
+          message(" ---- layer ", theseFiles[i], " ----")
+          crop(x = rast(thisFile), y = rast(x = path_modelregion),
+               snap = "out",
+               filename = thisDir_mdl,
+               overwrite = TRUE,
+               filetype = "GTiff",
+               datatype = datatype(rast(thisFile)),
+               gdal = c("COMPRESS=DEFLATE", "ZLEVEL=9", "PREDICTOR=2"))
 
-  }
+        }
 
 }
 

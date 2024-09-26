@@ -6,7 +6,7 @@
 # date        : 2024-MM-DD
 # version     : 0.0.0
 # status      : find data, update, inventarize, validate, normalize, done
-# comment     : file.edit(paste0(dir_docs, "/documentation/03_prepare_gridded_layers.md"))
+# comment     : file.edit(paste0(dir_docs, "/documentation/mdl_prepare_gridded_layers.md"))
 # ----
 # doi/url     : _INSERT
 # license     : _INSERT
@@ -15,7 +15,7 @@
 # variables   : _INSERT
 # ----
 
-thisDataset <- "meritDEM"
+thisDataset <- _INSERT
 message("\n---- ", thisDataset, " ----")
 
 thisDir <- .get_path(module = "grid", data = thisDataset)
@@ -33,24 +33,29 @@ theseFiles <- list.files(path = thisDir, pattern = "_30as.tif")
 
 for(i in seq_along(theseFiles)){
 
-        thisFile <- paste0(thisDir, theseFiles[i])
+  thisFile <- paste0(thisDir, theseFiles[i])
 
-        # crop to model extent
-        thisDir_mdl <- str_replace(thisFile, ".tif", paste0("_", model_info$tag, ".tif"))
-        if(!testFileExists(x = thisDir_mdl, access = "rw")){
+  # crop to model extent
+  thisDir_mdl <- str_replace(thisFile, ".tif", paste0("_", model_info$tag, ".tif"))
+  if(!testFileExists(x = thisDir_mdl, access = "rw")){
 
-                message(" ---- layer ", theseFiles[i], " ----")
-                crop(x = rast(thisFile), y = rast(x = path_modelregion),
-                     snap = "out",
-                     filename = thisDir_mdl,
-                     overwrite = TRUE,
-                     filetype = "GTiff",
-                     datatype = datatype(rast(thisFile)),
-                     gdal = c("COMPRESS=DEFLATE", "ZLEVEL=9", "PREDICTOR=2"))
+    message(" ---- layer ", theseFiles[i], " ----")
+    crop(x = rast(thisFile), y = rast(x = path_modelregion),
+         snap = "out",
+         filename = thisDir_mdl,
+         overwrite = TRUE,
+         filetype = "GTiff",
+         datatype = datatype(rast(thisFile)),
+         gdal = c("COMPRESS=DEFLATE", "ZLEVEL=9", "PREDICTOR=2"))
 
-        }
+  }
 
 }
 
 beep(sound = 10)
 message("\n     ... done")
+
+
+
+
+
