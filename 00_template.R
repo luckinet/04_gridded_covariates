@@ -6,7 +6,7 @@
 # date        : 2024-MM-DD
 # version     : 0.0.0
 # status      : find data, update, inventarize, validate, normalize, done
-# comment     : file.edit(paste0(dir_docs, "/documentation/03_prepare_gridded_layers.md"))
+# comment     : file.edit(paste0(dir_docs, "/documentation/mdl_prepare_gridded_layers.md"))
 # ----
 # doi/url     : _INSERT
 # license     : _INSERT
