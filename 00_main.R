@@ -3,7 +3,7 @@
 # description : This is the main script for preparing the gridded layers for modelling LUTS
 # license     : https://creativecommons.org/licenses/by-sa/4.0/
 # authors     : Steffen Ehrmann, Ruben Remelgado, Luise
-# date        : 2024-03-27
+# date        : 2024-09-26
 # version     : 0.3.0
 # status      : working
 # comment     : file.edit(paste0(dir_docs, "/documentation/mdl_prepare_gridded_layers.md"))
