@@ -2,7 +2,7 @@
 # title       : prepare gridded layers
 # description : This is the main script for preparing the gridded layers for modelling LUTS
 # license     : https://creativecommons.org/licenses/by-sa/4.0/
-# authors     : Steffen Ehrmann, Ruben Remelgado, Luise
+# authors     : Steffen Ehrmann
 # date        : 2024-09-26
 # version     : 0.3.0
 # status      : working
