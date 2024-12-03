@@ -18,7 +18,7 @@
 thisDataset <- "meritDEM"
 message("\n---- ", thisDataset, " ----")
 
-thisDir <- paste0(dir_grid_data, thisDataset, "/")
+thisDir <- paste0(.get_path("grid", "_data"), thisDataset, "/")
 
 message(" --> handling metadata")
 regDataseries(name = thisDataset,

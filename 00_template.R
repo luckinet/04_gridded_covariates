@@ -18,7 +18,8 @@
 thisDataset <- _INSERT
 message("\n---- ", thisDataset, " ----")
 
-thisDir <- .get_path(module = "grid", data = thisDataset)
+thisDir <- paste0(.get_path("grid", "_data"), thisDataset, "/")
+# source(paste0(.get_path("grid", "_data"), "preprocess_", thisDataset, ".R"))
 
 message(" --> handling metadata")
 regDataseries(name = thisDataset,

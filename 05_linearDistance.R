@@ -19,7 +19,7 @@ thisDataset <- "linearDistance"
 message("\n---- ", thisDataset, " ----")
 # source(paste0(.get_path("grid"), "preprocess_linearDistance.R"))
 
-thisDir <- paste0(dir_grid_data, thisDataset, "/")
+thisDir <- paste0(.get_path("grid", "_data"), thisDataset, "/")
 
 message(" --> handling metadata")
 regDataseries(name = thisDataset,
