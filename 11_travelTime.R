@@ -1,10 +1,10 @@
 # ----
-# title       : prepare gridded layers - _INESRT
-# description : This is the script for hamonizing _INSERT
+# title       : prepare gridded layers - travel time to markets
+# description : This is the script for building layers on the travel time to (major) markets
 # license     : https://creativecommons.org/licenses/by-sa/4.0/
-# authors     : Steffen Ehrmann, Ruben Remelgado
-# date        : 2024-MM-DD
-# version     : 0.0.0
+# authors     : Steffen Ehrmann, Carsten Meyer
+# date        : 2024-12-14
+# version     : 0.0.1
 # status      : find data, update, inventarize, validate, normalize, done
 # comment     : file.edit(paste0(dir_docs, "/documentation/03_prepare_gridded_layers.md"))
 # ----
@@ -14,6 +14,43 @@
 # years       : _INSERT
 # variables   : _INSERT
 # ----
+
+# https://www.nature.com/articles/nature25181 -> method
+# https://www.nature.com/articles/s41591-020-1059-1 -> one application for healthcare
+# https://www.nature.com/articles/s41597-019-0265-5 -> several different maps
+
+
+# https://forobs.jrc.ec.europa.eu/gam/sources
+# https://gisgeography.com/best-free-gis-data-sources-raster-vector/
+# https://blog.geofabrik.de/index.php/2024/11/13/historic-openstreetmap-data/
+# https://webhelp.esri.com/arcgisdesktop/9.2/index.cfm?TopicName=Cost_Distance_algorithm
+# Populated places https://human-settlement.emergency.copernicus.eu/, https://human-settlement.emergency.copernicus.eu/download.php
+# Additional cities
+# Road network https://worldroadstatistics.org/data/, https://gisgeography.com/openstreetmap-download-osm-data/, https://data.europa.eu/data/datasets/major-road-network?locale=en, https://www.globio.info/download-grip-dataset, https://www.nature.com/articles/s41586-024-07303-5, https://www.sciencedirect.com/science/article/pii/S0034425724004061, https://www.mdpi.com/2072-4292/14/15/3625
+# Railway network https://wiki.openstreetmap.org/wiki/OpenRailwayMap, https://www.openrailwaymap.org/
+# Navigable rivers
+# Major waterbodies https://global-surface-water.appspot.com/
+# Shipping lanes
+# National borders
+# Land cover esa cci lc (cf Ruben)
+# Urban areas
+# Elevation https://medium.com/nerd-for-tech/an-ensemble-digital-terrain-model-of-the-world-at-30-m-spatial-resolution-edtm30-b4fcff38164c
+# Slope https://medium.com/nerd-for-tech/an-ensemble-digital-terrain-model-of-the-world-at-30-m-spatial-resolution-edtm30-b4fcff38164c
+
+
+# does it make sense to include GDP? https://www.researchsquare.com/article/rs-4321741/v1
+
+# also see https://www.nature.com/articles/s43856-022-00179-4?fromPaywallRec=false, https://github.com/fleurhierink/Population_Access
+
+
+
+
+
+
+
+
+
+
 
 thisDataset <- "travelTime"
 message("\n---- ", thisDataset, " ----")
